@@ -33,7 +33,34 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'catppuccin)
-(setq catppuccin-flavor 'latte)
+(defun my-catppuccin-system-flavor ()
+  "Choose a Catppuccin flavor from the system appearance.
+Fall back to Mocha on Windows if appearance detection fails."
+  (if (condition-case nil
+          (if (fboundp 'doom--dark-mode-p)
+              (doom--dark-mode-p)
+            (eq system-type 'windows-nt))
+        (error (eq system-type 'windows-nt)))
+      'mocha
+    'latte))
+
+;; Set the flavor before Doom first loads the theme.
+(setq catppuccin-flavor (my-catppuccin-system-flavor))
+
+(defun my-catppuccin-sync-appearance ()
+  "Update the active Catppuccin theme when system appearance changes."
+  (when (and (custom-theme-enabled-p 'catppuccin)
+             (fboundp 'catppuccin-reload))
+    (let ((flavor (my-catppuccin-system-flavor)))
+      (unless (eq catppuccin-flavor flavor)
+        (setq catppuccin-flavor flavor)
+        (catppuccin-reload)))))
+
+(defvar my-catppuccin-appearance-timer nil)
+(when (timerp my-catppuccin-appearance-timer)
+  (cancel-timer my-catppuccin-appearance-timer))
+(setq my-catppuccin-appearance-timer
+      (run-with-idle-timer 5 t #'my-catppuccin-sync-appearance))
 ;; Specify both a dark and light theme, like so and Doom will choose which one
 ;; to load based on your system light/dark setting:
 ;;

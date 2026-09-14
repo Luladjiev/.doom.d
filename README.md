@@ -4,7 +4,7 @@ Personal Doom Emacs configuration maintained in `~/.config/doom`.
 
 ## Features
 
-- Catppuccin Latte theme and absolute line numbers.
+- Catppuccin Latte in system light mode and Mocha in dark mode, with absolute line numbers.
 - Evil editing, Corfu completion with Orderless, and Vertico selection.
 - Workspaces, snippets, folding, syntax checking, and Magit.
 - Ghostel terminal emulator, powered by libghostty-vt.
@@ -40,6 +40,11 @@ If `doom` is not on your `PATH`, invoke it from your Doom installation's `bin/` 
 After editing `init.el` or `packages.el`, run `doom sync` and restart Emacs. Changes confined to `config.el` do not require synchronization; restart Emacs to verify them.
 
 For example, set `display-line-numbers-type` to `'relative` in `config.el` to use relative line numbers. Adjust `org-directory` there to change where Org files are kept. Defer package-specific settings with `with-eval-after-load` when appropriate.
+
+The theme follows Doom's system appearance detection at startup and after five
+seconds of editor idle time. On Windows, it reads the Windows app light/dark
+setting. If detection fails, Windows falls back to Mocha; other systems use
+Latte. Restart Emacs after changing this configuration; no `doom sync` is needed.
 
 ## Terminal
 
