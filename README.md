@@ -8,7 +8,8 @@ Personal Doom Emacs configuration maintained in `~/.config/doom`.
 - Evil editing, Corfu completion with Orderless, and Vertico selection.
 - Workspaces, snippets, folding, syntax checking, and Magit.
 - Ghostel terminal emulator, powered by libghostty-vt.
-- Language modules for Emacs Lisp, JavaScript with Tree-sitter, JSON, Markdown, Org, Python, shell, web, and YAML.
+- Language modules for Emacs Lisp, JavaScript with Tree-sitter and Eglot LSP support, JSON, Markdown, Org, Python with Eglot LSP support, shell, web, and YAML.
+- For TypeScript/TSX documentation lookup (`K` in normal mode), install the language server with `npm install -g typescript typescript-language-server`.
 - macOS integration enabled conditionally on macOS.
 - Org files configured to live in `~/org/`.
 
