@@ -5,6 +5,7 @@ Personal Doom Emacs configuration maintained in `~/.config/doom`.
 ## Features
 
 - Catppuccin Latte in system light mode and Mocha in dark mode, with absolute line numbers.
+- GUI editor font set to 14 pixels.
 - Evil editing, Corfu completion with Orderless, and Vertico selection.
 - Workspaces, Treemacs project drawer, snippets, folding, syntax checking, and Magit.
 - Ghostel terminal emulator, powered by libghostty-vt.
