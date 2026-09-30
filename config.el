@@ -84,6 +84,11 @@ Fall back to Mocha on Windows if appearance detection fails."
   (when (eq system-type 'windows-nt)
     (setq ghostel-shell "pwsh.exe")))
 
+(when (eq system-type 'windows-nt)
+  (when-let* ((bash (executable-find "bash")))
+    (setq shell-file-name bash)
+    (setq explicit-shell-file-name bash)))
+
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
