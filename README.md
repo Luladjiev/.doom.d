@@ -6,7 +6,7 @@ Personal Doom Emacs configuration maintained in `~/.config/doom`.
 
 - Catppuccin Latte in system light mode and Mocha in dark mode, with absolute line numbers.
 - Evil editing, Corfu completion with Orderless, and Vertico selection.
-- Workspaces, snippets, folding, syntax checking, and Magit.
+- Workspaces, Treemacs project drawer, snippets, folding, syntax checking, and Magit.
 - Ghostel terminal emulator, powered by libghostty-vt.
 - Language modules for Emacs Lisp, JavaScript with Tree-sitter and Eglot LSP support, JSON, Markdown, Org, Python with Eglot LSP support, shell, web, and YAML.
 - For TypeScript/TSX documentation lookup (`K` in normal mode), install the language server with `npm install -g typescript typescript-language-server`.
