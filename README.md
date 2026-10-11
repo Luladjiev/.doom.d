@@ -50,6 +50,12 @@ Latte. Restart Emacs after changing this configuration; no `doom sync` is needed
 
 ## Terminal
 
+On Windows, keep Git for Windows installed and `git.exe` available on `PATH`.
+The configuration adds Git's `usr/bin` directory to Emacs's executable search
+path when `diff` is missing. This supplies GNU `diff` for formatting (including
+Zig) and buffer comparisons. Restart Emacs after changing this configuration;
+no `doom sync` is needed.
+
 On Windows, Ghostel uses `pwsh.exe`; PowerShell 7 must be available on `PATH`.
 
 Run `M-x ghostel` to open a terminal. On first launch, accept the prompt to download

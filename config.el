@@ -80,6 +80,17 @@ Fall back to Mocha on Windows if appearance detection fails."
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+;; Git for Windows ships diff outside the directory normally added to PATH.
+;; Formatting and buffer comparisons need it in both Emacs and subprocesses.
+(when (and (eq system-type 'windows-nt)
+           (not (executable-find "diff")))
+  (when-let* ((git (executable-find "git"))
+              (git-bin (file-name-directory (file-truename git)))
+              (diff-bin (expand-file-name "../usr/bin" git-bin)))
+    (when (file-executable-p (expand-file-name "diff.exe" diff-bin))
+      (add-to-list 'exec-path diff-bin t)
+      (setenv "PATH" (concat (getenv "PATH") path-separator diff-bin)))))
+
 (with-eval-after-load 'ghostel
   (when (eq system-type 'windows-nt)
     (setq ghostel-shell "pwsh.exe")))
