@@ -25,7 +25,7 @@
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 
 ;; An integer font size specifies pixels for GUI frames.
-(setq doom-font (font-spec :size 14))
+(setq doom-font (font-spec :family 'Iosevka' :size 14))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
