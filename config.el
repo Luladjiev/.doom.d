@@ -100,6 +100,9 @@ Fall back to Mocha on Windows if appearance detection fails."
     (setq shell-file-name bash)
     (setq explicit-shell-file-name bash)))
 
+(after! org
+  (setq org-agenda-files
+        (directory-files-recursively org-directory "\\.org$")))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
