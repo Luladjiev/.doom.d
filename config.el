@@ -104,6 +104,21 @@ Fall back to Mocha on Windows if appearance detection fails."
   (setq org-agenda-files
         (directory-files-recursively org-directory "\\.org$")))
 
+(defun my/org-refresh-agenda ()
+  "Refresh Org agenda files recursively."
+  (interactive)
+  (setq org-agenda-files
+        (directory-files-recursively org-directory "\\.org$"))
+  (when (derived-mode-p 'org-agenda-mode)
+    (org-agenda-redo)))
+
+(after! org
+  (my/org-refresh-agenda))
+
+(map! :leader
+      :desc "Refresh Org Agenda" "n r"
+      #'my/org-refresh-agenda)
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
 ;; settings. E.g.
