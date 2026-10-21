@@ -7,9 +7,13 @@ This directory contains a private Doom Emacs configuration, not the Doom distrib
 - `init.el`: enables Doom modules and flags through `doom!`, including Corfu, Vertico, Evil, and language support.
 - `packages.el`: declares additional dependencies with `package!`; currently adds `catppuccin-theme`.
 - `config.el`: holds runtime preferences, including the Catppuccin Latte theme, line numbers, and `org-directory`.
-- `readme.md`: documents setup, enabled features, and everyday configuration changes.
+- `README.md`: describes the current configuration, enabled features, and everyday usage.
 
 There are no separate source, test, or asset directories. Keep module selection, package declarations, and runtime settings in their respective files.
+
+## README Scope
+
+Keep `README.md` focused on what this configuration currently provides and how to use its features. Do not include installation or setup instructions, directions to edit configuration files, or steps to apply changes such as running `doom sync` or restarting Emacs. Keep contributor workflows and validation instructions in `AGENTS.md`.
 
 ## Build, Test, and Development Commands
 
@@ -33,4 +37,4 @@ No automated test suite or coverage threshold is configured. Run `M-x check-pare
 
 ## Commit & Pull Request Guidelines
 
-The repository is initialized on `main` but has no commits yet, so no historical commit convention exists. Use concise, imperative subjects such as `Configure relative line numbers`. Keep changes focused, and update `readme.md` when setup or documented behavior changes. Pull requests should explain the behavior change, list validation performed, and link relevant issues. Include screenshots for visible theme or layout changes.
+The repository is initialized on `main` but has no commits yet, so no historical commit convention exists. Use concise, imperative subjects such as `Configure relative line numbers`. Keep changes focused, and update `README.md` when features or documented behavior change, following the README Scope above. Pull requests should explain the behavior change, list validation performed, and link relevant issues. Include screenshots for visible theme or layout changes.
