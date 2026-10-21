@@ -2,69 +2,58 @@
 
 Personal Doom Emacs configuration maintained in `~/.config/doom`.
 
-## Features
+## Appearance
 
-- Catppuccin Latte in system light mode and Mocha in dark mode, with absolute line numbers.
-- GUI editor font set to 14 pixels.
-- Evil editing, Corfu completion with Orderless, and Vertico selection.
-- Workspaces, Treemacs project drawer, snippets, folding, syntax checking, and Magit.
-- Ghostel terminal emulator, powered by libghostty-vt.
-- Language modules for Emacs Lisp, JavaScript with Tree-sitter and Eglot LSP support, JSON, Markdown, Org, Python with Eglot LSP support, shell, web, and YAML.
-- For TypeScript/TSX documentation lookup (`K` in normal mode), install the language server with `npm install -g typescript typescript-language-server`.
-- macOS integration enabled conditionally on macOS.
-- Org files configured to live in `~/org/`.
+- Catppuccin Latte in system light mode and Mocha in dark mode.
+- System appearance is checked at startup and every five seconds of editor idle time. If detection is unavailable or fails, Windows uses Mocha and other systems use Latte.
+- GUI editor font size of 14 pixels.
+- Absolute line numbers, Doom dashboard and modeline, TODO highlighting, and version-control indicators in the fringe.
 
-## Setup
+## Editing and Navigation
 
-An existing Emacs and Doom Emacs installation is required. This repository supplies the private configuration; it does not install Doom itself.
+- Evil editing with Corfu completion, Orderless matching, and Vertico selection.
+- Workspaces, Treemacs project drawer, Dired, and remote file access through TRAMP.
+- File templates, snippets, folding, automatic formatting on save, indentation guessing, and whitespace trimming.
+- Syntax checking, persistent undo, automatic delimiter pairing, and Doom's default keybindings.
+- Magit, code and documentation lookup, and evaluation overlays.
+- Eglot for LSP support and Tree-sitter for syntax parsing.
 
-1. Place this checkout at `~/.config/doom`, preserving any existing configuration before replacing it. If using another location, set `DOOMDIR` to that directory when running Doom and Emacs.
-2. From a terminal, synchronize the declared modules and packages:
+## Languages
 
-   ```sh
-   doom sync
-   doom doctor
-   ```
+Enabled language modules include Emacs Lisp, JavaScript/TypeScript, JSON, Markdown, Org, Python, shell, web, YAML, and Zig.
 
-3. Address relevant dependency warnings, then launch or restart Emacs.
+JavaScript and Zig enable both Tree-sitter and LSP support. Python enables LSP support as well.
 
-If `doom` is not on your `PATH`, invoke it from your Doom installation's `bin/` directory. The additional theme dependency, `catppuccin-theme`, is declared in `packages.el` and installed through `doom sync`.
+## Terminal and Platform Integration
+
+- Ghostel terminal with the `+everywhere` flag, available through `M-x ghostel`.
+- macOS integration enabled on macOS.
+- On Windows, Ghostel uses `pwsh.exe`. Other Emacs shell commands use Bash when it is available.
+- On Windows, when `diff` is missing, the configuration adds Git for Windows' `usr/bin` directory to Emacs's executable search path and `PATH` if it contains `diff.exe`.
+
+## Org and Mermaid
+
+Org files live in `~/org/`. The agenda includes `.org` files recursively from that directory. `SPC n r` refreshes the agenda file list and redraws the current agenda buffer when invoked there.
+
+Mermaid source blocks export to Markdown as fenced code blocks tagged `mermaid`:
+
+```org
+#+begin_src mermaid
+flowchart LR
+    A[Write Org] --> B[Export Markdown]
+    B --> C[Render diagram]
+#+end_src
+```
+
+Markdown export is available through `C-c C-e m m` or `M-x org-md-export-to-markdown`. Viewers with Mermaid support can render the exported diagrams.
+
+Mermaid blocks default to `:exports code :eval never-export`, preserving diagram source without executing it during export. Other source blocks retain their usual Markdown export behavior.
 
 ## Configuration Files
 
-| File | Purpose |
+| File | Contents |
 | --- | --- |
-| `init.el` | Enable or disable Doom modules and their flags. |
-| `packages.el` | Declare additional packages and package overrides. |
-| `config.el` | Configure themes, editor behavior, and package settings. |
-| [AGENTS.md](AGENTS.md) | Contributor workflow and coding guidelines. |
-
-After editing `init.el` or `packages.el`, run `doom sync` and restart Emacs. Changes confined to `config.el` do not require synchronization; restart Emacs to verify them.
-
-For example, set `display-line-numbers-type` to `'relative` in `config.el` to use relative line numbers. Adjust `org-directory` there to change where Org files are kept. Defer package-specific settings with `with-eval-after-load` when appropriate.
-
-The theme follows Doom's system appearance detection at startup and after five
-seconds of editor idle time. On Windows, it reads the Windows app light/dark
-setting. If detection fails, Windows falls back to Mocha; other systems use
-Latte. Restart Emacs after changing this configuration; no `doom sync` is needed.
-
-## Terminal
-
-On Windows, keep Git for Windows installed and `git.exe` available on `PATH`.
-The configuration adds Git's `usr/bin` directory to Emacs's executable search
-path when `diff` is missing. This supplies GNU `diff` for formatting (including
-Zig) and buffer comparisons. Restart Emacs after changing this configuration;
-no `doom sync` is needed.
-
-On Windows, Ghostel uses `pwsh.exe`; PowerShell 7 must be available on `PATH`.
-
-Run `M-x ghostel` to open a terminal. On first launch, accept the prompt to download
-the native module for your platform. Supported macOS systems have prebuilt
-binaries, so compiling with Zig is optional. Restart Emacs after enabling the
-module and running `doom sync`.
-
-## Validation
-
-There is no automated test suite. Run `M-x check-parens` in edited Lisp files, restart Doom, and exercise the changed functionality. Run `doom doctor` after module or dependency changes and record relevant warnings when contributing.
-
-Inside Doom, use `SPC h d h` (or `C-h d h`) to open its documentation and inspect module options before enabling additional flags.
+| [init.el](init.el) | Enabled Doom modules and flags. |
+| [packages.el](packages.el) | Additional package declaration for `catppuccin-theme`. |
+| [config.el](config.el) | Appearance, editor preferences, platform integration, Org agenda, and Mermaid export settings. |
+| [AGENTS.md](AGENTS.md) | Repository guidelines for contributors. |
