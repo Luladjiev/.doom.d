@@ -119,6 +119,23 @@ Fall back to Mocha on Windows if appearance detection fails."
       :desc "Refresh Org Agenda" "n r"
       #'my/org-refresh-agenda)
 
+;; Keep Mermaid source for Markdown viewers to render, without running Babel.
+(with-eval-after-load 'org
+  (setq org-babel-default-header-args:mermaid
+        '((:exports . "code") (:eval . "never-export"))))
+
+(with-eval-after-load 'ox-md
+  (defun my/org-md-mermaid-block (original block contents info)
+    "Export Mermaid source BLOCK as a fenced Markdown code block.
+Delegate other blocks to ORIGINAL with CONTENTS and INFO."
+    (if (and (eq (org-element-type block) 'src-block)
+             (equal (org-element-property :language block) "mermaid"))
+        (concat "```mermaid\n"
+                (org-export-format-code-default block info)
+                "```\n")
+      (funcall original block contents info)))
+  (advice-add 'org-md-example-block :around #'my/org-md-mermaid-block))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
 ;; settings. E.g.
