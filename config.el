@@ -136,6 +136,12 @@ Delegate other blocks to ORIGINAL with CONTENTS and INFO."
       (funcall original block contents info)))
   (advice-add 'org-md-example-block :around #'my/org-md-mermaid-block))
 
+;; Do not clear rust errors on hover
+(after! flycheck
+  (add-hook 'rustic-mode-hook
+            (lambda ()
+              (setq-local flycheck-check-syntax-automatically
+                          '(save mode-enabled)))))
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
 ;; settings. E.g.
